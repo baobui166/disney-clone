@@ -8,8 +8,9 @@ function Login() {
         <CTALogoOne src="/images/cta-logo-one.svg" />
         <SignUp>Get All There</SignUp>
         <Description>
-          Disney+ is the dedicated streaming home for movies and shows from
-          Disney, Pixar, Marvel, Star Wars, and National Geographic, along with
+          Get Premier Access to Raya and the Last Dragon for an additional fee
+          with a Disney+ subscription. As of 03/26/21, the price of Disney+ and
+          The Disney Bundle will increase by $1.
         </Description>
         <CTALogoTwo src="/images/cta-logo-two.png" />
       </CTA>
@@ -44,7 +45,7 @@ const Container = styled.main`
 `;
 
 const CTA = styled.div`
-  max-width: 650px;
+  max-width: 1200px;
   padding: 80px 40px;
   width: 60%;
   display: flex;

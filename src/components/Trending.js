@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { selectNewDisney } from "../features/movies/moviesSlice";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { selectTrending } from "../features/movies/moviesSlice";
+import { useSelector } from "react-redux";
 
-function Movies(props) {
-  const movies = useSelector(selectNewDisney);
+function Trending() {
+  const movies = useSelector(selectTrending);
 
   return (
     <Container>
-      <h4>New to Disney</h4>
+      <h4>Trending</h4>
       <Content>
         {movies &&
           movies.map((movie, index) => (
             <Wrap key={index}>
-              <Link to={"/detail/" + movie.id}>
+              <Link to="/home">
                 <img src={movie.cardImg} alt={movie.title} />
               </Link>
             </Wrap>
@@ -24,7 +24,7 @@ function Movies(props) {
   );
 }
 
-export default Movies;
+export default Trending;
 
 const Container = styled.div`
   margin-top: 30px;

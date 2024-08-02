@@ -1,15 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { selectNewDisney } from "../features/movies/moviesSlice";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { selectOriginal } from "../features/movies/moviesSlice";
 
-function Movies(props) {
-  const movies = useSelector(selectNewDisney);
-
+function Originals() {
+  const movies = useSelector(selectOriginal);
   return (
     <Container>
-      <h4>New to Disney</h4>
+      <h4>Originals</h4>
       <Content>
         {movies &&
           movies.map((movie, index) => (
@@ -24,7 +23,7 @@ function Movies(props) {
   );
 }
 
-export default Movies;
+export default Originals;
 
 const Container = styled.div`
   margin-top: 30px;

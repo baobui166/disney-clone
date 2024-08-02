@@ -1,22 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "./Button";
+import { useParams } from "react-router-dom";
+import db from "../firebase";
 
-function Detail() {
+function Detail({ props }) {
+  const { id } = useParams();
+  const [detailData, setDetailData] = useState({});
+
+  useEffect(() => {
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setDetailData(doc.data());
+        } else {
+          console.log("no such document in firebase 🔥");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+  }, [id]);
+
   return (
     <Container>
       <Background>
-        <img
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4F39B7E16726ECF419DD7C49E011DD95099AA20A962B0B10AA1881A70661CE45/scale?width=1440&aspectRatio=1.78&format=jpeg"
-          alt="DetailImage"
-        />
+        <img src={detailData.backgroundImg} alt={detailData.title} />
       </Background>
 
       <ImageTitle>
-        <img
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D7AEE1F05D10FC37C873176AAA26F777FC1B71E7A6563F36C6B1B497CAB1CEC2/scale?width=1440&aspectRatio=1.78"
-          alt="title"
-        />
+        <img alt={detailData.title} src={detailData.titleImg} />
       </ImageTitle>
 
       <Controls>
@@ -39,12 +54,8 @@ function Detail() {
         </Button>
       </Controls>
 
-      <Subtitle>2018 - 7m - Family, Fantasy, Animation</Subtitle>
-      <Description>
-        Bao is a 2018 American animated short film written and directed by Domee
-        Shi and produced by Pixar Animation Studios. It is the first Pixar short
-        film to be directed by a female director.
-      </Description>
+      <Subtitle>{detailData.subTitle}</Subtitle>
+      <Description>{detailData.description}</Description>
     </Container>
   );
 }
